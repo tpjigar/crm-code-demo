@@ -1,7 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Http\Middleware\EnsureClientUser;
+use App\Http\Middleware\EnsurePasswordNotExpired;
+use App\Http\Middleware\EnsureSuperAdmin;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
+use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -21,6 +27,13 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleAppearance::class,
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
+            SecurityHeaders::class,
+        ]);
+
+        $middleware->alias([
+            'password.not-expired' => EnsurePasswordNotExpired::class,
+            'role.super_admin' => EnsureSuperAdmin::class,
+            'role.client' => EnsureClientUser::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
