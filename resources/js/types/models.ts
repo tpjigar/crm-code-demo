@@ -21,6 +21,32 @@ export type OwnerOption = {
     name: string;
 };
 
+export type ClientOption = {
+    id: number;
+    name: string;
+};
+
+export type Contact = {
+    id: number;
+    client_id: number;
+    first_name: string;
+    last_name: string;
+    full_name: string;
+    job_title: string | null;
+    email: string | null;
+    phone: string | null;
+    email_masked: boolean;
+    phone_masked: boolean;
+    is_primary: boolean;
+    notes: string | null;
+    client?: {
+        id: number | null;
+        name: string | null;
+    };
+    created_at: string | null;
+    updated_at: string | null;
+};
+
 export type Paginated<T> = {
     data: T[];
     links: { url: string | null; label: string; active: boolean }[];
