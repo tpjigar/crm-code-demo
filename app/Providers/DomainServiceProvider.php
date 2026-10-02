@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Contracts\Services\ClientServiceInterface;
+use App\Contracts\Services\ContactServiceInterface;
 use App\Services\ClientService;
+use App\Services\ContactService;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -24,6 +26,7 @@ class DomainServiceProvider extends ServiceProvider
     {
         return [
             ClientServiceInterface::class => ClientService::class,
+            ContactServiceInterface::class => ContactService::class,
         ];
     }
 
