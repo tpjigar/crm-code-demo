@@ -1,26 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Concerns;
 
+use App\Rules\StrongPasswordRule;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Validation\Rules\Password;
 
 trait PasswordValidationRules
 {
     /**
-     * Get the validation rules used to validate passwords.
-     *
-     * @return array<int, Password|ValidationRule|array<mixed>|string>
+     * @return array<int, ValidationRule|string>
      */
     protected function passwordRules(): array
     {
-        return ['required', 'string', Password::default(), 'confirmed'];
+        return ['required', 'string', new StrongPasswordRule, 'confirmed'];
     }
 
     /**
-     * Get the validation rules used to validate the current password.
-     *
-     * @return array<int, Password|ValidationRule|array<mixed>|string>
+     * @return array<int, ValidationRule|string>
      */
     protected function currentPasswordRules(): array
     {
