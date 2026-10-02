@@ -24,9 +24,14 @@ use Illuminate\Database\Eloquent\Scope;
  * The guarantee: a developer forgetting a where('client_id', ...) in
  * portal code cannot leak data across tenants, because the scope has
  * already added it.
+ *
+ * @implements Scope<Model>
  */
 class ClientTenantScope implements Scope
 {
+    /**
+     * @param  Builder<covariant Model>  $builder
+     */
     public function apply(Builder $builder, Model $model): void
     {
         $user = auth()->user();
