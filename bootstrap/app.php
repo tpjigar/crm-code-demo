@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
+use App\Http\Middleware\EnsureClientUser;
 use App\Http\Middleware\EnsurePasswordNotExpired;
+use App\Http\Middleware\EnsureSuperAdmin;
 use App\Http\Middleware\HandleAppearance;
 use App\Http\Middleware\HandleInertiaRequests;
 use App\Http\Middleware\SecurityHeaders;
@@ -30,6 +32,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'password.not-expired' => EnsurePasswordNotExpired::class,
+            'role.super_admin' => EnsureSuperAdmin::class,
+            'role.client' => EnsureClientUser::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
