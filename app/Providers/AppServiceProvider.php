@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Listeners\Auth\RecordLoginMetadata;
+use App\Models\Client;
+use App\Policies\ClientPolicy;
 use Carbon\CarbonImmutable;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Validation\Rules\Password;
 
@@ -29,8 +32,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        $this->registerPolicies();
 
         Event::listen(Login::class, RecordLoginMetadata::class);
+    }
+
+    private function registerPolicies(): void
+    {
+        Gate::policy(Client::class, ClientPolicy::class);
     }
 
     /**
