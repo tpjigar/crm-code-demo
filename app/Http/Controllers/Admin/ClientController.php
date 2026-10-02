@@ -12,6 +12,7 @@ use App\Http\Requests\Admin\Clients\UpdateClientRequest;
 use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use App\Models\User;
+use App\Services\Clients\SecurityScoreService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -26,6 +27,7 @@ class ClientController extends Controller
 {
     public function __construct(
         private readonly ClientServiceInterface $clients,
+        private readonly SecurityScoreService $scoring,
     ) {}
 
     public function index(Request $request): Response
@@ -67,6 +69,12 @@ class ClientController extends Controller
 
         return Inertia::render('admin/clients/show', [
             'client' => new ClientResource($client),
+            'security' => [
+                'score' => $this->scoring->compute($client),
+                'risk_level' => $this->scoring->riskLevel($client)->value,
+                'risk_label' => $this->scoring->riskLevel($client)->label(),
+                'risk_color' => $this->scoring->riskLevel($client)->badgeColor(),
+            ],
         ]);
     }
 
