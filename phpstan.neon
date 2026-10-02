@@ -11,6 +11,3 @@ parameters:
         - routes/
 
     level: 10
-
-    checkMissingIterableValueType: true
-    checkGenericClassInNonGenericObjectType: true
