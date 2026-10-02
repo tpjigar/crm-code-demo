@@ -6,7 +6,9 @@ namespace App\Providers;
 
 use App\Listeners\Auth\RecordLoginMetadata;
 use App\Models\Client;
+use App\Models\Contact;
 use App\Policies\ClientPolicy;
+use App\Policies\ContactPolicy;
 use Carbon\CarbonImmutable;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Date;
@@ -40,6 +42,7 @@ class AppServiceProvider extends ServiceProvider
     private function registerPolicies(): void
     {
         Gate::policy(Client::class, ClientPolicy::class);
+        Gate::policy(Contact::class, ContactPolicy::class);
     }
 
     /**
