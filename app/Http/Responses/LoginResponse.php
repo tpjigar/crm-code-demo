@@ -7,6 +7,7 @@ namespace App\Http\Responses;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Fortify\Contracts\LoginResponse as LoginResponseContract;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 
@@ -22,7 +23,7 @@ class LoginResponse implements LoginResponseContract
             return response()->noContent();
         }
 
-        $user = $request->user();
+        $user = Auth::user();
         $route = $user instanceof User
             ? $user->primaryRole()?->dashboardRoute()
             : null;
