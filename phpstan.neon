@@ -10,4 +10,7 @@ parameters:
         - database/
         - routes/
 
-    level: 7
+    level: 10
+
+    checkMissingIterableValueType: true
+    checkGenericClassInNonGenericObjectType: true
