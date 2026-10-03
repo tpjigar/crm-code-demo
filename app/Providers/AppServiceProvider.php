@@ -8,9 +8,11 @@ use App\Listeners\Auth\RecordLoginMetadata;
 use App\Models\Client;
 use App\Models\Contact;
 use App\Models\Incident;
+use App\Models\Session;
 use App\Policies\ClientPolicy;
 use App\Policies\ContactPolicy;
 use App\Policies\IncidentPolicy;
+use App\Policies\SessionPolicy;
 use Carbon\CarbonImmutable;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Date;
@@ -46,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
         Gate::policy(Client::class, ClientPolicy::class);
         Gate::policy(Contact::class, ContactPolicy::class);
         Gate::policy(Incident::class, IncidentPolicy::class);
+        Gate::policy(Session::class, SessionPolicy::class);
     }
 
     /**
