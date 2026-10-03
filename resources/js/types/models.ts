@@ -88,6 +88,30 @@ export type AssigneeOption = {
     name: string;
 };
 
+export type ActiveSession = {
+    id: string;
+    user: { id: number; name: string; email: string } | null;
+    ip_address: string | null;
+    browser: string;
+    os: string;
+    device: string;
+    is_current: boolean;
+    last_activity_at: string;
+    last_activity_human: string;
+};
+
+export type AuditLogEntry = {
+    id: number;
+    log_name: string | null;
+    event: string | null;
+    description: string;
+    subject_type: string | null;
+    subject_id: number | null;
+    causer: { id: number; name: string | null; email: string | null } | null;
+    properties: Record<string, unknown>;
+    created_at: string | null;
+};
+
 export type Paginated<T> = {
     data: T[];
     links: { url: string | null; label: string; active: boolean }[];
