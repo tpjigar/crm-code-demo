@@ -6,8 +6,10 @@ namespace App\Providers;
 
 use App\Contracts\Services\ClientServiceInterface;
 use App\Contracts\Services\ContactServiceInterface;
+use App\Contracts\Services\IncidentServiceInterface;
 use App\Services\ClientService;
 use App\Services\ContactService;
+use App\Services\IncidentService;
 use Illuminate\Support\ServiceProvider;
 
 /**
@@ -27,6 +29,7 @@ class DomainServiceProvider extends ServiceProvider
         return [
             ClientServiceInterface::class => ClientService::class,
             ContactServiceInterface::class => ContactService::class,
+            IncidentServiceInterface::class => IncidentService::class,
         ];
     }
 
