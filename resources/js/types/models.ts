@@ -47,6 +47,47 @@ export type Contact = {
     updated_at: string | null;
 };
 
+export type IncidentSeverityValue = 'low' | 'medium' | 'high' | 'critical';
+export type IncidentStatusValue = 'new' | 'investigating' | 'resolved' | 'closed';
+
+export type IncidentStatusInfo = {
+    value: IncidentStatusValue;
+    label: string;
+    color: string;
+    allowed_next: { value: IncidentStatusValue; label: string }[];
+};
+
+export type IncidentSeverityInfo = {
+    value: IncidentSeverityValue;
+    label: string;
+    color: string;
+    ack_sla_hours: number;
+};
+
+export type Incident = {
+    id: number;
+    reference: string;
+    client_id: number;
+    title: string;
+    description: string;
+    severity: IncidentSeverityInfo;
+    status: IncidentStatusInfo;
+    sla_breached: boolean;
+    acknowledged_at: string | null;
+    resolved_at: string | null;
+    closed_at: string | null;
+    client?: { id: number | null; name: string | null };
+    assignee?: { id: number; name: string } | null;
+    reporter?: { id: number; name: string } | null;
+    created_at: string | null;
+    updated_at: string | null;
+};
+
+export type AssigneeOption = {
+    id: number;
+    name: string;
+};
+
 export type Paginated<T> = {
     data: T[];
     links: { url: string | null; label: string; active: boolean }[];
